@@ -1,0 +1,13 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: service-registry
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: false
+  instance:
+    lease-renewal-interval-in-seconds: 0
