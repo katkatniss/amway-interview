@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+      routes:
+        - id: calculator-service
+          uri: lb://calculator-service
+          predicates:
+            - Path=/calculator/**
+        - id: prize-wheel-service
+          uri: lb://prize-wheel-service
+          predicates:
+            - Path=/prize-wheel/**
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://amway-service-registry:8761/eureka/
