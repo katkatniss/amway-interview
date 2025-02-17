@@ -1,0 +1,25 @@
+services:
+  cloud-gateway:
+    container_name: amway-cloud-gateway
+    build:
+      dockerfile: cloud-gateway/Dockerfile
+    ports:
+      - "8080:8080"
+  calculator-service:
+    container_name: amway-calculator-service
+    build:
+      dockerfile: calculator-service/Dockerfile
+    ports:
+      - "8081:8081"
+  prize-wheel-service:
+    container_name: amway-prize-wheel-service
+    build:
+      dockerfile: prize-wheel-service/Dockerfile
+    ports:
+      - "8082:8082"
+  service-registry:
+    container_name: amway-service-registry
+    build:
+      dockerfile: service-registry/Dockerfile
+    ports:
+      - "8761:8761"
