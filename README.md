@@ -1,14 +1,14 @@
-# 🎯 Interview Project
+# 🎯 Amyway Interview
 
 This project consists of a microservices-based architecture that includes four main services:
 
--Cloud Gateway - API gateway for routing requests.
+- Cloud Gateway - API gateway for routing requests.
 
--Service Registry - Eureka server for service discovery.
+- Service Registry - Eureka server for service discovery.
 
--Calculator Service - A RESTful API that performs mathematical calculations.
+- Calculator Service - A RESTful API that performs mathematical calculations.
 
--Prize Wheel Service - An API for an e-commerce spin-the-wheel lottery system.
+- Prize Wheel Service - An API for an e-commerce spin-the-wheel lottery system.
 
 ## 🏗️ Project Structure
 
@@ -41,12 +41,25 @@ Docker (optional for containerization)
 
 # Installation & Running the Services
 
-Clone the repository:
+**Clone the repository:**
 
 ```sh
 git clone https://github.com/katkatniss/amway-interview.git
 cd amway-interview
 ```
+
+**Run services with Docker:**
+
+- Generate the jar file for running:
+```sh
+mvn clean install -Dskiptests=true
+```
+- Builds, (re)creates, starts, and attaches to containers for services
+```sh
+docker-compose -f compose.yml up --build --force-recreate
+```
+
+**Run services with spring boot embedded server:**
 
 Start the Service Registry (Eureka):
 ```sh
@@ -68,7 +81,6 @@ Start Prize Wheel Service:
 cd prize-wheel-service
 mvn spring-boot:run
 ```
-Alternatively, use docker-compose up if a compose.yml file is provided.
 
 ## 📡 API Documentation
 
@@ -82,19 +94,35 @@ Each service exposes RESTful APIs:
 | GET    | `/calculator/undo`  | Undo last operation     |
 | GET    | `/calculator/redo`  | Redo last undone operation |
 
-Example:
-
-GET /calculator/10+3  # Returns 13
-
 
 ### **Prize Wheel Service (/prize-wheel)**
 
-| Method | Endpoint          | Description              |
-|--------|------------------|--------------------------|
-| POST   | `/prize-wheel/setupPrizes` | Setup the prizes  |
-| GET    | `/prize-wheel/{times}`  | Spin the wheel multiple times and get prizes |
+| Method | Endpoint         | Description                 | Request Body Example |
+|--------|------------------|-----------------------------|----------------------|
+| POST   | `/prize-wheel/setupPrizes` | Setup the prizes  | [🔗 Request Body for /prize-wheel/setupPrizes](#request-body-for-/prize-wheel/setupPrizes)|
+| GET    | `/prize-wheel/{times}`  | Spin the wheel multiple times and get prizes |  |
+
+### Request Body for /prize-wheel/setupPrizes
+```json
+{
+    "prizes" : [
+        {
+            "name": "Prize A",
+            "stock": 10,
+            "probability": 0.5
+        },
+        {
+            "name": "Prize B",
+            "stock": 10,
+            "probability": 0.1
+        },
+        {
+            "name": "Prize C",
+            "stock": 10,
+            "probability": 0.2
+        }]
+}
 
 
-Example:
 
 
