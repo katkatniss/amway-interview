@@ -104,13 +104,15 @@ Description: Evaluates a mathematical expression and returns the result.
 
 Examples:
 
-✅ /calculator/10+3 → 13
+✅ /calculator/10+3 → 13 (status: 200)
 
-✅ /calculator/2.5*4 → 10
+✅ /calculator/2.5*4 → 10 (status: 200)
 
 Possible Errors:
 
-/calculator/abc – Invalid expression format (e.g., /calculator/10++3)
+/calculator/abc -> 無效運算式 (status: 400)
+
+/calculator/3/0 -> 不能除以零 (status: 400)
 
 2️⃣ Undo Last Operation
 
@@ -122,7 +124,7 @@ Description: Undoes the last operation and restores the previous result.
 
 Example:
 
-✅ /calculator/undo → Previous result restored
+✅ /calculator/undo → {Previous result restored(empty if there is none)} (status: 200)
 
 3️⃣ Redo Last Undone Operation
 
@@ -134,7 +136,7 @@ Description: Redoes the last undone operation.
 
 Example:
 
-✅ /calculator/redo → Redo last undone operation
+✅ /calculator/redo → {Redo last undone operation(empty if there is none)} (status: 200)
 
 ### **Prize Wheel Service (/prize-wheel)**
 
@@ -171,11 +173,26 @@ Request Body Example:
             "probability": 0.2
         }]
 }
-
-Example Response: ✅ { "message": "Prizes configured successfully" }
+```
+→ ✅ 成功 (status: 200)
 
 Possible Errors:
-400 Bad Request – Invalid prize structure
+
+```json
+{
+    "prizes" : null
+}
+```
+→ 獎品不能為空 (status: 400)
+
+```json
+{
+    "name": "Prize A",
+    "stock": 10,
+    "probability": 1.1
+}
+```
+→ 無法設定獎品 機率加總不可大於1 (status: 400)
 
 2️⃣ Spin the Wheel Multiple Times
 
@@ -187,15 +204,15 @@ Description: Spins the wheel and returns the list of prizes won.
 
 Examples:
 
-✅ /prize-wheel/3 → ["Prize A", "Prize B", "Prize C"]
+✅ /prize-wheel/3 → ["Prize A", "Prize B", "Prize C"] (status: 200)
 
-✅ /prize-wheel/5 → ["Prize A", "Prize B", "Prize C", "Prize D", "Prize E"]
+✅ /prize-wheel/5 → ["Prize A", "Prize B", "Prize C", "Prize D", "Prize E"] (status: 200)
 
 Possible Errors:
 
-/prize-wheel/a → 
+/prize-wheel/a → (status: 400)
 
-/prize-wheel/0 →
+/prize-wheel/0 → (status: 400)
 
 
 
