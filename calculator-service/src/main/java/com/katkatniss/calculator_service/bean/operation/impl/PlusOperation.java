@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @Component("+")
-public class PlusOperation implements Operation {
+public class PlusOperation extends Operation {
 
   @Override
-  public BigDecimal calculate(BigDecimal a, BigDecimal b, int scale) {
-    return a.add(b);
+  protected BigDecimal calculateWithScaleZero(BigDecimal a, BigDecimal b, int scale) {
+    return a.add(b).stripTrailingZeros();
   }
 
 }

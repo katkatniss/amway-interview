@@ -7,14 +7,14 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 @Component("/")
-public class DivisionOperation implements Operation {
+public class DivisionOperation extends Operation {
 
   @Override
-  public BigDecimal calculate(BigDecimal a, BigDecimal b, int scale) {
+  protected BigDecimal calculateWithScaleZero(BigDecimal a, BigDecimal b, int scale) {
     if (b.compareTo(BigDecimal.ZERO) == 0) {
       throw new ArithmeticException("Cannot divide by zero");
     }
-    return a.divide(b, scale, RoundingMode.HALF_UP).stripTrailingZeros();
+    return a.divide(b, scale, RoundingMode.HALF_UP);
   }
 
 }

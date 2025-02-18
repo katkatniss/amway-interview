@@ -82,7 +82,7 @@ public class CalculatorServiceImpl implements CalculatorService {
       throw new IllegalArgumentException(INVALID_EXPRESSION);
     }
 
-    BigDecimal res = o.calculate(x, y, scale).stripTrailingZeros();
+    BigDecimal res = o.calculate(x, y, scale);
 
     if (curr != null) {
       undoStack.push(curr);

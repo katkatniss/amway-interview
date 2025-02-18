@@ -34,21 +34,21 @@ public class CalculatorServiceImplTest {
   private Operation division;
 
   @Test
-  void testAddition() {
+  void testPlus() {
     when(plus.calculate(BigDecimal.valueOf(2), BigDecimal.valueOf(3), 10)).thenReturn(BigDecimal.valueOf(5));
     BigDecimal result = calculatorService.calculate("2 + 3");
     assertEquals(BigDecimal.valueOf(5), result);
   }
 
   @Test
-  void testSubtraction() {
+  void testMinus() {
     when(minus.calculate(BigDecimal.valueOf(5), BigDecimal.valueOf(2), 10)).thenReturn(BigDecimal.valueOf(3));
     BigDecimal result = calculatorService.calculate("5 - 2");
     assertEquals(BigDecimal.valueOf(3), result);
   }
 
   @Test
-  void testMultiplication() {
+  void testMultiply() {
     when(multiply.calculate(BigDecimal.valueOf(4), BigDecimal.valueOf(3), 10)).thenReturn(BigDecimal.valueOf(12));
     BigDecimal result = calculatorService.calculate("4 * 3");
     assertEquals(BigDecimal.valueOf(12), result);
