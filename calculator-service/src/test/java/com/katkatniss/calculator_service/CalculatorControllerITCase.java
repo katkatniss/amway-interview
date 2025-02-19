@@ -21,10 +21,16 @@ public class CalculatorControllerITCase {
 
   @Test
   void testCalculatorIntegration() {
-    ResponseEntity<String> response = restTemplate.getForEntity("/calculator/2+3", String.class);
+    ResponseEntity<String> response = restTemplate.getForEntity("/calculator/2+8", String.class);
     assertEquals(200, response.getStatusCodeValue());
-    assertEquals("5", response.getBody());
+    assertEquals("10", response.getBody());
     response = restTemplate.getForEntity("/calculator/5/3", String.class);
+    assertEquals(200, response.getStatusCodeValue());
+    assertEquals("1.6666666667", response.getBody());
+    response = restTemplate.getForEntity("/calculator/undo", String.class);
+    assertEquals(200, response.getStatusCodeValue());
+    assertEquals("10", response.getBody());
+    response = restTemplate.getForEntity("/calculator/redo", String.class);
     assertEquals(200, response.getStatusCodeValue());
     assertEquals("1.6666666667", response.getBody());
     response = restTemplate.getForEntity("/calculator/1.333333*1.333333", String.class);

@@ -33,13 +33,15 @@ public class CalculatorController {
   }
 
   @GetMapping("/undo")
-  public ResponseEntity<BigDecimal> undo() {
-    return ResponseEntity.ok(calculatorService.undo());
+  public ResponseEntity<String> undo() {
+    BigDecimal res = calculatorService.undo();
+    return ResponseEntity.ok(res == null ? "" : res.toPlainString());
   }
 
   @GetMapping("/redo")
-  public ResponseEntity<BigDecimal> redo() {
-    return ResponseEntity.ok(calculatorService.redo());
+  public ResponseEntity<String> redo() {
+    BigDecimal res = calculatorService.redo();
+    return ResponseEntity.ok(res == null ? "" : res.toPlainString());
   }
 
 }
