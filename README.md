@@ -94,15 +94,66 @@ Each service exposes RESTful APIs:
 | GET    | `/calculator/undo`  | Undo last operation     |
 | GET    | `/calculator/redo`  | Redo last undone operation |
 
+1️⃣ Evaluate an Expression
+
+Method: GET
+
+Endpoint: /calculator/{exp}
+
+Description: Evaluates a mathematical expression and returns the result.
+
+Examples:
+
+✅ /calculator/10+3 → 13 (status: 200)
+
+✅ /calculator/2.5*4 → 10 (status: 200)
+
+Possible Errors:
+
+/calculator/abc -> 無效運算式 (status: 400)
+
+/calculator/3/0 -> 不能除以零 (status: 400)
+
+2️⃣ Undo Last Operation
+
+Method: GET
+
+Endpoint: /calculator/undo
+
+Description: Undoes the last operation and restores the previous result.
+
+Example:
+
+✅ /calculator/undo → {Previous result restored(empty if there is none)} (status: 200)
+
+3️⃣ Redo Last Undone Operation
+
+Method: GET
+
+Endpoint: /calculator/redo
+
+Description: Redoes the last undone operation.
+
+Example:
+
+✅ /calculator/redo → {Redo last undone operation(empty if there is none)} (status: 200)
 
 ### **Prize Wheel Service (/prize-wheel)**
 
-| Method | Endpoint         | Description                 | Request Body Example |
-|--------|------------------|-----------------------------|----------------------|
-| POST   | `/prize-wheel/setupPrizes` | Setup the prizes  | [🔗 Request Body for /prize-wheel/setupPrizes](#request-body-for-/prize-wheel/setupPrizes)|
-| GET    | `/prize-wheel/{times}`  | Spin the wheel multiple times and get prizes |  |
+| Method | Endpoint         | Description                 |
+|--------|------------------|-----------------------------|
+| POST   | `/prize-wheel/setupPrizes` | Setup the prizes  |
+| GET    | `/prize-wheel/{times}`  | Spin the wheel multiple times and get prizes |
 
-### Request Body for /prize-wheel/setupPrizes
+1️⃣ Setup the Prizes
+
+Method: POST
+
+Endpoint: /prize-wheel/setupPrizes
+
+Description: Sets up the prize list for the spinning wheel.
+
+Request Body Example:
 ```json
 {
     "prizes" : [
@@ -122,6 +173,47 @@ Each service exposes RESTful APIs:
             "probability": 0.2
         }]
 }
+```
+→ ✅ 成功 (status: 200)
+
+Possible Errors:
+
+```json
+{
+    "prizes" : null
+}
+```
+→ 獎品不能為空 (status: 400)
+
+```json
+{
+    "name": "Prize A",
+    "stock": 10,
+    "probability": 1.1
+}
+```
+→ 無法設定獎品 機率加總不可大於1 (status: 400)
+
+2️⃣ Spin the Wheel Multiple Times
+
+Method: GET
+
+Endpoint: /prize-wheel/{times}
+
+Description: Spins the wheel and returns the list of prizes won.
+
+Examples:
+
+✅ /prize-wheel/3 → ["Prize A", "Prize B", "Prize C"] (status: 200)
+
+✅ /prize-wheel/5 → ["Prize A", "Prize B", "Prize C", "Prize D", "Prize E"] (status: 200)
+
+Possible Errors:
+
+/prize-wheel/a → (status: 400)
+
+/prize-wheel/0 → (status: 400)
+
 
 
 
