@@ -47,7 +47,7 @@ public class PrizeWheelControllerTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(pr)))
         .andExpect(status().isOk())
-        .andExpect(content().string(containsString("Success")));
+        .andExpect(content().string(containsString("成功")));
 
     verify(prizeWheelService, times(1)).setupPrizes(prizes);
   }
@@ -60,7 +60,7 @@ public class PrizeWheelControllerTest {
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(pr)))
         .andExpect(status().isBadRequest())
-        .andExpect(content().string(containsString("Prizes cannot be null or empty.")));
+        .andExpect(content().string(containsString("獎品不能為空")));
   }
 
   @Test
@@ -75,7 +75,7 @@ public class PrizeWheelControllerTest {
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(pr)))
         .andExpect(status().isBadRequest())
-        .andExpect(content().string(containsString("Failed to setup prizes.")));
+        .andExpect(content().string(containsString("無法設定獎品")));
     System.out.println(content());
   }
 
