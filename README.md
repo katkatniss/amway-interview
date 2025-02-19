@@ -214,7 +214,7 @@ Possible Errors:
 
 /prize-wheel/a → 抽獎次數必須是數字 (status: 400)
 
-/prize-wheel/0 → 抽獎次數必須大於0"(status: 400)
+/prize-wheel/0 → 抽獎次數必須大於0 (status: 400)
 
 
 
