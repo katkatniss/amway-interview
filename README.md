@@ -86,6 +86,8 @@ mvn spring-boot:run
 
 Each service exposes RESTful APIs:
 
+Base URL: http://localhost:8080
+
 ### **Calculator Service (/calculator)**
 
 | Method | Endpoint          | Description              |
